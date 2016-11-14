@@ -25,8 +25,18 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-
-    # you code
+if options == 1:
+        show_table()
+    elif options == 2:
+        add()
+    elif options == 3:
+        remove()
+    elif options == 4:
+        update()
+    elif options == 5:
+        which_year_max
+    elif options == 6
+        avg_amount()
 
     pass
 

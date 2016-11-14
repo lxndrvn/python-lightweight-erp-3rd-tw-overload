@@ -26,18 +26,30 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-
-    # you code
+    if options == 1:
+        show_table()
+    elif options == 2:
+        add()
+    elif options == 3:
+        remove()
+    elif options == 4:
+        update()
+    elif options == 5
+        get_items_sold_between()
+    elif options == 6
+        get_lowest_price_item_id()
 
     pass
-
 
 # print the default table of records from the file
 #
 # @table: list of lists
-def show_table(table):
 
-    # your code
+
+def show_table(table):
+    title_list = ["ID", "Title", "Price", "Month", "Day", "Year"]
+    ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
+    start_module()
 
     pass
 

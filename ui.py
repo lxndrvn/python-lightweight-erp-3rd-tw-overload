@@ -11,22 +11,26 @@
 #
 # @table: list of lists - the table to print out
 # @title_list: list of strings - the head of the table
+
+
 def print_table(table, title_list):
-
-    # your code
-
-    pass
+    print(('|') + (" | ".join(title_list)) + ('|'))
+    for row in table:
+        print(('|') + ('-') * 30 + ('|'))
+        print(('|') + (" | ".join(row)) + ('|'))
+    print(('|') + ('-') * 30 + ('|'))
 
 
 # This function needs to print result of the special functions
 #
 # @result: string or list or dictionary - result of the special function
 # @label: string - label of the result
+
 def print_result(result, label):
+    special_lol = result
 
-    # your code
 
-    pass
+# pass
 
 
 # This function needs to generate outputs like this:
@@ -42,11 +46,12 @@ def print_result(result, label):
 # @title: string - title of the menu
 # @list_options: list of strings - the options in the menu
 # @exit_message: string - the last option with (0) (example: "Back to main menu")
+
 def print_menu(title, list_options, exit_message):
-
-    # your code
-
-    pass
+    print(title)
+    for n in range(0, len(list_options)):
+        print('(' + str(n + 1) + ') ' + list_options[n])
+    print('(0) ' + exit_message)
 
 
 # This function gets a list of inputs from the user by the terminal
@@ -54,19 +59,19 @@ def print_menu(title, list_options, exit_message):
 # @list_labels: list of strings - the labels of the inputs
 # @title: string - title of the "input section"
 # @inputs: list of string - list of the received values from the user
+
 def get_inputs(list_labels, title):
-    inputs = []
-
-    # your code
-
+    inputs = [0]
+    chosen_function = input(list_titles[0])
+    inputs[0] = chosen_function
     return inputs
 
 
 # This function needs to print an error message. (example: Error: @message)
 #
 # @message: string - the error message
+
 def print_error_message(message):
+    print(message)
 
-    # your code
-
-    pass
+# pass
