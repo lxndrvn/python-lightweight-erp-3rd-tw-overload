@@ -53,10 +53,11 @@ def show_table(table):
 
     pass
 
-
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
 # @table: list of lists
+
+
 def add(table):
 
     # your code

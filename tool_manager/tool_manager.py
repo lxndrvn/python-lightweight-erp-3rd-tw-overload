@@ -25,8 +25,6 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 #
 def start_module():
 
-    # you code
-
     pass
 
 
@@ -34,8 +32,9 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
-    # your code
+    title_list = ["ID", "Title", "Manufacturer", "Purchase date", "Durability"]
+    ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
+    start_module()
 
     pass
 
