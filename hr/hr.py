@@ -22,28 +22,41 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-
-    # you code
-
-    pass
-
+    if options == 1:
+        show_table("persons.csv")
+    elif options == 2:
+        add("persons.csv")
+    elif options == 3:
+        remove("persons.csv", id)
+    elif options == 4:
+        update("person.csv", id)
+    elif options == 5:
+        get_oldest_person("persons.csv")
+    elif options == 6:
+        get_persons_closest_to_average("person.csv")
 
 # print the default table of records from the file
 #
 # @table: list of lists
+
+
 def show_table(table):
+    list_of_titles = ["Data Structure", "ID", "Name", "Birth Date"]
+    ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
 
-    # your code
 
-    pass
-
+# data structure:
+# id: string
+#     Unique and random generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
+# name: string
+# birth_date: number (year)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
 # @table: list of lists
 def add(table):
 
-    # your code
+        # your code
 
     return table
 
