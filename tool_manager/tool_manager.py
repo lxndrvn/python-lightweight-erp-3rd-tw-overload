@@ -24,6 +24,18 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
+    if options == 1:
+        show_table("tools.csv")
+    elif options == 2:
+        add("tools.csv")
+    elif options == 3:
+        remove("tools.csv", id_)
+    elif options == 4:
+        update("tools.csv", id_)
+    elif options == 5
+        get_available_tools("tools.csv")
+    elif options == 6
+        get_average_durability_by_manufacturers("tools.csv")
 
     pass
 
@@ -31,7 +43,7 @@ def start_module():
 # print the default table of records from the file
 # @table: list of lists
 def show_table(table):
-    title_list = ["ID", "Title", "Manufacturer", "Purchase date", "Durability"]
+    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
     ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
     start_module()
 

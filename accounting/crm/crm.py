@@ -23,8 +23,18 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-
-    # you code
+    if options == 1:
+        show_table("customers.csv")
+    elif options == 2:
+        add("customers.csv")
+    elif options == 3:
+        remove("customers.csv", id_)
+    elif options == 4:
+        update("customers.csv", id_)
+    elif options == 5
+        get_longest_name_id("customers.csv")
+    elif options == 6
+        get_subscribed_emails("customers.csv")
 
     pass
 
@@ -33,8 +43,9 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
-    # your code
+    title_list = ["ID", "Name", "Email", "Subscribed"]
+    ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
+    start_module()
 
     pass
 
