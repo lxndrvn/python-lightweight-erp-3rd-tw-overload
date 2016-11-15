@@ -25,31 +25,32 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-if options == 1:
+    if options == 1:
         show_table()
     elif options == 2:
-        add()
+        add(items.csv)
     elif options == 3:
-        remove()
+        remove(items.csv, _id)
     elif options == 4:
-        update()
+        update(items.csv, _id)
     elif options == 5:
-        which_year_max
-    elif options == 6
-        avg_amount()
-
-    pass
-
+        which_year_max(table)
+    elif options == 6:
+        avg_amount(table, 2016)
 
 # print the default table of records from the file
 #
 # @table: list of lists
+
+
 def show_table(table):
    list_titles = ["ID", "Month", "Day", "Year", "Type", "Amount"]
     ui.print_table(table, list_titles)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 # @table: list of lists
+
+
 def add(table):
     title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
     add_item = [common.generate_random(table)] + ui.get_inputs(list_labels, table)
@@ -60,10 +61,13 @@ def add(table):
 #
 # @table: list of lists
 # @id_: string
+
+
 def remove(table, id_):
-
-    # your code
-
+    for i in table:
+        if id in i:
+            table.remove(i)
+        return(i)
     return table
 
 
