@@ -27,18 +27,17 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 #
 def start_module():
     if options == 1:
-        show_table()
+        show_table('selling.csv')
     elif options == 2:
-        add()
+        add(selling.csv)
     elif options == 3:
-        remove()
+        remove('sellings.csv', id_)
     elif options == 4:
-        update()
-    elif options == 5
-        get_items_sold_between()
-    elif options == 6
-        get_lowest_price_item_id()
-
+        update('selings.csv', id_)
+    elif options == 5:
+        get_lowest_price_item_id(table)
+    elif options == 6:
+        get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
     pass
 
 # print the default table of records from the file
@@ -59,9 +58,9 @@ def show_table(table):
 
 
 def add(table):
-
-    # your code
-
+    title_list = ["ID", "Title", "Price", "Month", "Day", "Year"]
+    add_item = [common.generate_random(table)] + ui.get_inputs(list_labels, table)
+    table.append(add_item)
     return table
 
 
@@ -69,10 +68,11 @@ def add(table):
 #
 # @table: list of lists
 # @id_: string
+
 def remove(table, id_):
-
-    # your code
-
+    for l in table:
+        if id_ in l:
+            table.remove(l)
     return table
 
 
@@ -81,12 +81,13 @@ def remove(table, id_):
 #
 # @table: list of lists
 # @id_: string
+
 def update(table, id_):
-
-    # your code
-
+    title_list = ["ID", "Title", "Price", "Month", "Day", "Year"]
+    for i in table:
+        if id_ in i:
+            i = [id_] + ui.get_inputs(list_labels, table)
     return table
-
 
 # special functions:
 # ------------------
@@ -94,17 +95,31 @@ def update(table, id_):
 # the question: What is the id of the item that sold for the lowest price ?
 # return type: string (id)
 # if there are more than one with the lowest price, return the first of descending alphabetical order
+
+
 def get_lowest_price_item_id(table):
-
-    # your code
-
-    pass
+    lowest_prices = table[i][2]
+    names = []
+    for i in table:
+        if int(i[2]) <= sm_prices:
+            sm_prices = int(i[2])
+    for i in table:
+        if i[1] == max(names):
+            return i[0]
+    return lowest_price
 
 
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
-def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
 
-    # your code
+def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
+    from_date = int(str(year_from) + str(month_from) + str(day_from))
+    to_date = int(str(year_from) + str(month_from) + str(day_from))
+    get_list = []
+    for i in table:
+        date_today = int(str(i[5]) + str(i[3]) + str(i[4]))
+        if (date_today > from_date) and (date_today < to_date):
+            get_list.append(i)
+    return get_list
 
     pass
