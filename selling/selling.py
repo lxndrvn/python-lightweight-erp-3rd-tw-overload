@@ -98,19 +98,17 @@ def update(table, id_):
 
 
 def get_lowest_price_item_id(table):
-    lowest_prices = table[i][2]
-    names = []
+    lowest_prices = 1000000000
+    id = 0
     for i in table:
-        if int(i[2]) <= sm_prices:
-            sm_prices = int(i[2])
-    for i in table:
-        if i[1] == max(names):
-            return i[0]
-    return lowest_price
-
+        if lowest_prices > int(i[2]):
+            lowest_prices = int(i[2])
+            id = i[0]
+    return id
 
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
+
 
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
     from_date = int(str(year_from) + str(month_from) + str(day_from))
@@ -121,5 +119,3 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         if (date_today > from_date) and (date_today < to_date):
             get_list.append(i)
     return get_list
-
-    pass

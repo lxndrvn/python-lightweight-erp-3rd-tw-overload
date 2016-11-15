@@ -22,12 +22,11 @@ def print_table(table, title_list):
 
 
 # This function needs to print result of the special functions
-#
 # @result: string or list or dictionary - result of the special function
 # @label: string - label of the result
 
-def print_result(result, label):
-    special_lol = result
+#def print_result(result, label):
+    #special_lol = result
 
 
 # pass
@@ -68,7 +67,6 @@ def get_inputs(list_labels, title):
 
 
 # This function needs to print an error message. (example: Error: @message)
-#
 # @message: string - the error message
 
 def print_error_message(message):

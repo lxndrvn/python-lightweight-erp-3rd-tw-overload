@@ -45,21 +45,16 @@ if options == 1:
 #
 # @table: list of lists
 def show_table(table):
-
-    # your code
-
-    pass
-
+   list_titles = ["ID", "Month", "Day", "Year", "Type", "Amount"]
+    ui.print_table(table, list_titles)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
-#
 # @table: list of lists
 def add(table):
-
-    # your code
-
+    title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
+    add_item = [common.generate_random(table)] + ui.get_inputs(list_labels, table)
+    table.append(add_item)
     return table
-
 
 # Remove the record having the id @id_ from the @list, than return @table
 #
