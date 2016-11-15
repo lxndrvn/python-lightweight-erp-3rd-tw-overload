@@ -44,7 +44,7 @@ def start_module():
 
 
 def show_table(table):
-   list_titles = ["ID", "Month", "Day", "Year", "Type", "Amount"]
+    list_titles = ["ID", "Month", "Day", "Year", "Type", "Amount"]
     ui.print_table(table, list_titles)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
@@ -77,9 +77,11 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
-
-    # your code
-
+    id_list = []
+    title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
+    for line in table:
+        if id_ in line:
+            line = [id_] + ui.get_inputs(list_titles, table)
     return table
 
 
@@ -89,16 +91,39 @@ def update(table, id_):
 # the question: Which year has the highest profit? (profit=in-out)
 # return the answer (number)
 def which_year_max(table):
+    year = {}
+    for line in table:
+        if line[4] == "in":
+            if line[3] not in year.keys():
+                year.update({line[3]: float(line[5])})
+            else:
+                year[line[3]] += float(line[5])
+        elif line[4] == "out":
+            if line[3] not in year.keys():
+                year.update({line[3]: float(line[5])})
+            else:
+                year[line[3]] += float(line[5])
+    max = max(year.values())
+    for k, v in year.items():
+        if v == max:
+            k = answer
+    return answer
 
-    # your code
+    # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
+    # return the answer (number)
 
-    pass
 
-
-# the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
-# return the answer (number)
 def avg_amount(table, year):
-
-    # your code
-
+    profit = 0
+    counter = 0
+    for line in table:
+        if int(line[3]) == year:
+            if str(line[4]) == str("in"):
+                profit += int(line[5])
+                counter += 1
+            elif str(line[4]) == str("out"):
+                profit -= int(line[5])
+                counter += 1
+    avg_profit = profit / counter
+    return(avg_profit)
     pass
