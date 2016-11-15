@@ -53,9 +53,9 @@ def show_table(table):
 #
 # @table: list of lists
 def add(table):
-
-    # your code
-
+    title_list = ["ID", "Name", "Email", "Subscribed"]
+    new_record = [common.generate_random(table)] + ui.get_inputs(title_list, table)
+    table.append(new_record)
     return table
 
 
@@ -64,9 +64,10 @@ def add(table):
 # @table: list of lists
 # @id_: string
 def remove(table, id_):
-
-    # your code
-
+    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
+    for line in table:
+        if id_ in line:
+            table.remove(line)
     return table
 
 
@@ -76,9 +77,11 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
-
-    # your code
-
+    id_list = []
+    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
+    for line in table:
+        if id_ in line:
+            line = [id_] + ui.get_inputs(list_titles, table)
     return table
 
 
@@ -89,16 +92,23 @@ def update(table, id_):
 # the question: What is the id of the customer with the longest name ?
 # return type: string (id) - if there are more than one longest name, return the first of descending alphabetical order
 def get_longest_name_id(table):
-
-    # your code
-
-    pass
+    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
+    longest_name = [' ']
+    for line in table:
+        if len(line[1]) == len(longest_name[0]):
+            longest_name.append(line[1])
+        elif len(line[1]) > len(longest_name[0]):
+            longest_name[0] = line[1]
+    for line in table:
+        if min(longest_name) in line[1]:
+            return(line[0]) 
 
 
 # the question: Which customers has subscribed to the newsletter?
 # return type: list of string (where string is like email+separator+name, separator=";")
 def get_subscribed_emails(table):
-
-    # your code
-
-    pass
+    subscribers = []
+    for line in table:
+        if '1' in line[3]:
+            subscribers.append(line[2] + ';' + line[1])
+    return(subscribers)

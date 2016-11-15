@@ -101,7 +101,7 @@ def get_available_tools(table):
     for a in range(len(available_tools)):
         available_tools[a][3] = int(available_tools[a][3])
         available_tools[a][4] = int(available_tools[a][4])
-    return table
+    return available_tools
 
 
 # the question: What are the average durability time for each manufacturer?
@@ -109,7 +109,14 @@ def get_available_tools(table):
 #
 # @table: list of lists
 def get_average_durability_by_manufacturers(table):
-
-    # your code
-
-    pass
+    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
+    average_durability = {}
+    average_durability = {manufacturer[2]: 0 for manufacturer in table if average_durability.get(manufacturer[2]) == None}
+    keys = average_durability.keys()
+    counter_dict = {key: 0 for key in keys}
+    for tool in table:
+        average_durability[str(tool[2])] = average_durability[str(tool[2])] + int(tool[4])
+        counter_dict[str(tool[2])] += 1
+    for key in average_durability.keys():
+        average_durability[key] /= counter_dict[key]
+    return(average_durability)
