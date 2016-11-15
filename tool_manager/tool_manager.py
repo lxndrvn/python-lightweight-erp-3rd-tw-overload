@@ -32,11 +32,12 @@ def start_module():
         remove("tools.csv", id_)
     elif options == 4:
         update("tools.csv", id_)
-    elif options == 5
+    elif options == 5:
         get_available_tools("tools.csv")
-    elif options == 6
+    elif options == 6:
         get_average_durability_by_manufacturers("tools.csv")
-
+    elif option == 0:
+        return
     pass
 
 
@@ -45,8 +46,6 @@ def start_module():
 def show_table(table):
     title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
     ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
-    start_module()
-
     pass
 
 
@@ -54,9 +53,10 @@ def show_table(table):
 #
 # @table: list of lists
 def add(table):
-
-    # your code
-
+    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
+    ID = (common.generate_random(table))
+    new_element = [ID] + ui.get_inputs(title_list, " ")
+    table.append(new_element)
     return table
 
 
@@ -65,9 +65,11 @@ def add(table):
 # @table: list of lists
 # @id_: string
 def remove(table, id_):
-
-    # your code
-
+    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
+    for a in range(len(table)):
+        if str(id_) == str(table[a][0]):
+            table.pop(a)
+            break
     return table
 
 
@@ -77,9 +79,11 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
-
-    # your code
-
+    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
+    for a in range(len(table)):
+        if str(id_) == str(table[a][0]):
+            updated_element = ui.get_inputs(title_list, " ")
+            table[a] = [id_] + updated_element
     return table
 
 
@@ -91,10 +95,13 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_tools(table):
-
-    # your code
-
-    pass
+    date = 2016
+    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
+    available_tools = [element for element in table if (int(element[3]) + int(element[4])) >= date]
+    for a in range(len(available_tools)):
+        available_tools[a][3] = int(available_tools[a][3])
+        available_tools[a][4] = int(available_tools[a][4])
+    return table
 
 
 # the question: What are the average durability time for each manufacturer?

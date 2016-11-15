@@ -31,11 +31,12 @@ def start_module():
         remove("customers.csv", id_)
     elif options == 4:
         update("customers.csv", id_)
-    elif options == 5
+    elif options == 5:
         get_longest_name_id("customers.csv")
-    elif options == 6
+    elif options == 6:
         get_subscribed_emails("customers.csv")
-
+    elif option == 0:
+        return
     pass
 
 
@@ -45,8 +46,6 @@ def start_module():
 def show_table(table):
     title_list = ["ID", "Name", "Email", "Subscribed"]
     ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
-    start_module()
-
     pass
 
 
