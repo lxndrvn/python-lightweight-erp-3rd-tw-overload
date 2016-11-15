@@ -24,10 +24,18 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-
-    # you code
-
-    pass
+    if options == 1:
+        show_table("games.csv")
+    elif options == 2:
+        add("games.csv")
+    elif options == 3:
+        remove("games.csv", id)
+    elif options == 4:
+        update("games.csv", id)
+    elif options == 5:
+        get_counts_by_manufacturers("games.csv")
+    elif options == 6:
+        get_average_by_manufacturer("games.csv", manufacturer)
 
 
 # print the default table of records from the file
