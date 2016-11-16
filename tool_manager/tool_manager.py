@@ -24,17 +24,19 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-    if options == 1:
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == 1:
         show_table("tools.csv")
-    elif options == 2:
+    elif option == 2:
         add("tools.csv")
-    elif options == 3:
+    elif option == 3:
         remove("tools.csv", id_)
-    elif options == 4:
+    elif option == 4:
         update("tools.csv", id_)
-    elif options == 5:
+    elif option == 5:
         get_available_tools("tools.csv")
-    elif options == 6:
+    elif option == 6:
         get_average_durability_by_manufacturers("tools.csv")
     elif option == 0:
         return
@@ -111,7 +113,8 @@ def get_available_tools(table):
 def get_average_durability_by_manufacturers(table):
     title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
     average_durability = {}
-    average_durability = {manufacturer[2]: 0 for manufacturer in table if average_durability.get(manufacturer[2]) == None}
+    average_durability = {manufacturer[2]: 0 for manufacturer in table if average_durability.get(manufacturer[
+                                                                                                 2]) == None}
     keys = average_durability.keys()
     counter_dict = {key: 0 for key in keys}
     for tool in table:

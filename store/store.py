@@ -24,17 +24,19 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-    if options == 1:
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == 1:
         show_table("games.csv")
-    elif options == 2:
+    elif option == 2:
         add("games.csv")
-    elif options == 3:
+    elif option == 3:
         remove("games.csv", id)
-    elif options == 4:
+    elif option == 4:
         update("games.csv", id)
-    elif options == 5:
+    elif option == 5:
         get_counts_by_manufacturers(table)
-    elif options == 6:
+    elif option == 6:
         get_average_by_manufacturer(table, manufacturer)
 
 # else?

@@ -26,17 +26,19 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 
 def start_module():
-    if options == 1:
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == 1:
         show_table('selling.csv')
-    elif options == 2:
+    elif option == 2:
         add(selling.csv)
-    elif options == 3:
+    elif option == 3:
         remove('sellings.csv', id_)
-    elif options == 4:
+    elif option == 4:
         update('selings.csv', id_)
-    elif options == 5:
+    elif option == 5:
         get_lowest_price_item_id(table)
-    elif options == 6:
+    elif option == 6:
         get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
 
 # print the default table of records from the file

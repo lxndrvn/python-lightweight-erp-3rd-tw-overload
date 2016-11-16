@@ -1,12 +1,3 @@
-# data structure:
-# id: string
-#     Unique and random generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
-# month: number
-# day: number
-# year: number
-# type: string (in = income, out = outcome)
-# amount: number (dollar)
-
 
 # importing everything you need
 import os
@@ -20,35 +11,43 @@ data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_ma
 common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
 
 
-# start this module by a module menu like the main menu
-# user need to go back to the main menu from here
-# we need to reach the default and the special functions of this module from the module menu
-#
 def start_module():
-    if options == 1:
-        show_table()
-    elif options == 2:
-        add(items.csv)
-    elif options == 3:
-        remove(items.csv, _id)
-    elif options == 4:
-        update(items.csv, _id)
-    elif options == 5:
-        which_year_max(table)
-    elif options == 6:
-        avg_amount(table, 2016)
 
-# print the default table of records from the file
-#
-# @table: list of lists
+    title = "Accounting"
+
+    list_options = ['Show_table',
+                    'Add',
+                    'Remove',
+                    'Update',
+                    'get the highest profit',
+                    'get the average profit']
+
+    exit_message = "Go back to main"
+
+    ui.print_menu(title, list_options, exit_message)
+
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+
+    if option == 1:
+        show_table()
+    elif option == 2:
+        add(items.csv)
+    elif option == 3:
+        remove(items.csv, _id)
+    elif option == 4:
+        update(items.csv, _id)
+    elif option == 5:
+        which_year_max(table)
+    elif option == 6:
+        avg_amount(table, 2016)
+    else:
+        raise KeyError("It's not an option.")
 
 
 def show_table(table):
     title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
     ui.print_table(table, title_list)
-
-# Ask a new record as an input from the user than add it to @table, than return @table
-# @table: list of lists
 
 
 def add(table):
@@ -56,11 +55,6 @@ def add(table):
     add_item = [common.generate_random(table)] + ui.get_inputs(list_labels, table)
     table.append(add_item)
     return table
-
-# Remove the record having the id @id_ from the @list, than return @table
-#
-# @table: list of lists
-# @id_: string
 
 
 def remove(table, id_):
@@ -70,11 +64,6 @@ def remove(table, id_):
     return table
 
 
-# Update the record in @table having the id @id_ by asking the new data from the user,
-# than return @table
-#
-# @table: list of lists
-# @id_: string
 def update(table, id_):
     title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
     for line in table:
@@ -83,11 +72,6 @@ def update(table, id_):
     return table
 
 
-# special functions:
-# ------------------
-
-# the question: Which year has the highest profit? (profit=in-out)
-# return the answer (number)
 def which_year_max(table):
     year = {}
     for line in table:
@@ -106,9 +90,6 @@ def which_year_max(table):
         if v == maxi:
             answer = int(k)
     return answer
-
-    # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
-    # return the answer (number)
 
 
 def avg_amount(table, year):

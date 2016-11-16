@@ -16,11 +16,10 @@
 def print_table(table, title_list):
     print(('|') + (" | ".join(title_list)) + ('|'))
     for row in table:
-        print(('|') + ('-') * 30 + ('|'))
+        print(('|') + ('-') * 20 + ('|'))
         print(('|') + (" | ".join(row)) + ('|'))
-    print(('|') + ('-') * 30 + ('|'))
+    print(('|') + ('-') * 20 + ('|'))
 
-print_table('sellings.csv', title_list)
 # This function needs to print result of the special functions
 # @result: string or list or dictionary - result of the special function
 # @label: string - label of the result
@@ -60,10 +59,11 @@ def print_menu(title, list_options, exit_message):
 # @inputs: list of string - list of the received values from the user
 
 def get_inputs(list_labels, title):
-    inputs = [0]
-    chosen_function = input(list_titles[0])
-    inputs[0] = chosen_function
-    return inputs
+    list = []
+    for item in list_labels:
+        add = input('%s' % (item))
+        list.append(add)
+    return list
 
 
 # This function needs to print an error message. (example: Error: @message)
