@@ -20,13 +20,13 @@ def print_table(table, title_list):
         print(('|') + (" | ".join(row)) + ('|'))
     print(('|') + ('-') * 30 + ('|'))
 
-
+print_table('sellings.csv', title_list)
 # This function needs to print result of the special functions
 # @result: string or list or dictionary - result of the special function
 # @label: string - label of the result
 
-#def print_result(result, label):
-    #special_lol = result
+# def print_result(result, label):
+#special_lol = result
 
 
 # pass

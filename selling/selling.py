@@ -80,9 +80,9 @@ def remove(table, id_):
 
 def update(table, id_):
     title_list = ["ID", "Title", "Price", "Month", "Day", "Year"]
-    for i in table:
-        if id_ in i:
-            i = [id_] + ui.get_inputs(list_labels, table)
+    for line in table:
+        if id_ in line:
+            line = [id_] + ui.get_inputs(list_labels, table)
     return table
 
 # special functions:
@@ -95,7 +95,7 @@ def update(table, id_):
 
 
 def get_lowest_price_item_id(table):
-    lowest_price = 1000000000
+    lowest_price = 1000000
     id = 0
     for line in table:
         if int(line[2]) < lowest_price:

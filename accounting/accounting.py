@@ -44,8 +44,8 @@ def start_module():
 
 
 def show_table(table):
-    list_titles = ["ID", "Month", "Day", "Year", "Type", "Amount"]
-    ui.print_table(table, list_titles)
+    title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
+    ui.print_table(table, title_list)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 # @table: list of lists
@@ -67,7 +67,6 @@ def remove(table, id_):
     for i in table:
         if id in i:
             table.remove(i)
-        return(i)
     return table
 
 
@@ -77,11 +76,10 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
-    id_list = []
     title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
     for line in table:
         if id_ in line:
-            line = [id_] + ui.get_inputs(list_titles, table)
+            line = [id_] + ui.get_inputs(title_list, table)
     return table
 
 
@@ -92,22 +90,21 @@ def update(table, id_):
 # return the answer (number)
 def which_year_max(table):
     year = {}
-    maxi = 0
     for line in table:
         if line[4] == "in":
             if line[3] not in year.keys():
-                year.update({line[3]: float(line[5])})
+                year.update({line[3]: int(line[5])})
             else:
-                year[line[3]] += float(line[5])
+                year[line[3]] += int(line[5])
         elif line[4] == "out":
             if line[3] not in year.keys():
-                year.update({line[3]: float(line[5])})
+                year.update({line[3]: int(line[5])})
             else:
-                year[line[3]] += float(line[5])
+                year[line[3]] += int(line[5])
     maxi = max(year.values())
-    for k, v in year.values():
+    for k, v in year.items():
         if v == maxi:
-            answer = k
+            answer = int(k)
     return answer
 
     # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
