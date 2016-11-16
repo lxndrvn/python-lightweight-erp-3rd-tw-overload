@@ -92,6 +92,7 @@ def update(table, id_):
 # return the answer (number)
 def which_year_max(table):
     year = {}
+    maxi = 0
     for line in table:
         if line[4] == "in":
             if line[3] not in year.keys():
@@ -103,10 +104,10 @@ def which_year_max(table):
                 year.update({line[3]: float(line[5])})
             else:
                 year[line[3]] += float(line[5])
-    max = max(year.values())
-    for k, v in year.items():
-        if v == max:
-            k = answer
+    maxi = max(year.values())
+    for k, v in year.values():
+        if v == maxi:
+            answer = k
     return answer
 
     # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
@@ -124,6 +125,6 @@ def avg_amount(table, year):
             elif str(line[4]) == str("out"):
                 profit -= int(line[5])
                 counter += 1
-    avg_profit = profit / counter
-    return(avg_profit)
+    avg = profit / counter
+    return avg
     pass

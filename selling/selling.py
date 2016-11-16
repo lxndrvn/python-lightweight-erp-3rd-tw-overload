@@ -118,8 +118,8 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     from_date = int(str(year_from) + str(month_from) + str(day_from))
     to_date = int(str(year_from) + str(month_from) + str(day_from))
     get_list = []
-    for i in table:
-        date_today = int(str(i[5]) + str(i[3]) + str(i[4]))
-        if (date_today > from_date) and (date_today < to_date):
-            get_list.append(i)
+    for line in table:
+        date_today = int(str(line[5]) + str(line[3]) + str(line[4]))
+        if date_today > from_date and date_today < to_date:
+            get_list.append(line)
     return get_list
