@@ -79,8 +79,8 @@ def show_table(table):
 
 
 def add(table):
-    list_of_titles = ["ID", "Title", "Manufacturers", "Price", "in stock"]
-    new_element = ui.get_inputs(title_list, " ")
+    list_of_titles = ["ID: ", "Title: ", "Manufacturers: ", "Price: ", "in stock: "]
+    new_element = ui.get_inputs(list_of_titles, " ")
     table.append(new_element)
     return table
 
