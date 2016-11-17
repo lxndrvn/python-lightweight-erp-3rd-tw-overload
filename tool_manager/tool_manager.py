@@ -42,17 +42,43 @@ def start_module():
         table = data_manager.get_table_from_file(path)
     
         if option == 1:
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
             show_table(path)
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 2:
-            add(path)
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
+            data_manager.write_table_to_file(path, add(table))
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 3:
-            remove(path, id_)
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
+            id_ = ui.get_inputs(["Enter the ID to remove: "], "")
+            data_manager.write_table_to_file(path, remove(table, id_[0]))
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 4:
-            update(path, id_)
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
+            id_ = ui.get_inputs(["Enter the ID to update or modify: "], "")
+            data_manager.write_table_to_file(path, update(table, id_[0]))
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 5:
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
             get_available_tools(path)
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 6:
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
             get_average_durability_by_manufacturers(path)
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 0:
             return
         else:
@@ -73,8 +99,7 @@ def show_table(table):
 # @table: list of lists
 def add(table):
     title_list = ["ID: ", "Name: ", "Manufacturer: ", "Purchase date: ", "Durability: "]
-    ID = ()
-    new_element = [ID] + ui.get_inputs(title_list, " ")
+    new_element = ui.get_inputs(title_list, " ")
     table.append(new_element)
     return table
 
@@ -84,7 +109,6 @@ def add(table):
 # @table: list of lists
 # @id_: string
 def remove(table, id_):
-    title_list = ["ID: ", "Name: ", "Manufacturer: ", "Purchase date: ", "Durability: "]
     for a in range(len(table)):
         if str(id_) == str(table[a][0]):
             table.pop(a)
@@ -114,29 +138,11 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_tools(table):
-    date = 2016
-    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
-    available_tools = [element for element in table if (int(element[3]) + int(element[4])) >= date]
-    for a in range(len(available_tools)):
-        available_tools[a][0] = int(available_tools[a][0])
-        available_tools[a][1] = int(available_tools[a][1])
-    return available_tools
-    pass
+    print ("Sorry, we don't have enough time to do this :'( ")
 
 # the question: What are the average durability time for each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [avg] }
 #
 # @table: list of lists
 def get_average_durability_by_manufacturers(table):
-    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
-    average_durability = {}
-    average_durability = {manufacturer[2]: 0 for manufacturer in table if average_durability.get(manufacturer[
-                                                                                                 2]) == None}
-    keys = average_durability.keys()
-    counter_dict = {key: 0 for key in keys}
-    for tool in table:
-        average_durability[str(tool[2])] = average_durability[str(tool[2])] + int(tool[4])
-        counter_dict[str(tool[2])] += 1
-    for key in average_durability.keys():
-        average_durability[key] /= counter_dict[key]
-    return(average_durability)
+    print ("Sorry, we don't have enough time to do this :'( ")

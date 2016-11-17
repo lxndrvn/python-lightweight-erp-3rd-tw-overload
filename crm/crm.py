@@ -23,21 +23,29 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-    if option == 1:
-        show_table("customers.csv")
-    elif option == 2:
-        add("customers.csv")
-    elif option == 3:
-        remove("customers.csv", id_)
-    elif option == 4:
-        update("customers.csv", id_)
-    elif option == 5:
-        get_longest_name_id("customers.csv")
-    elif option == 6:
-        get_subscribed_emails("customers.csv")
-    elif option == 0:
-        return
-    pass
+    list_options = ["Show table",
+                    "Add",
+                    "Remove",
+                    "Update",
+                    "Get the ID of the customer with the longest name",
+                    "Get subscriber's emails"]
+    while True:
+        ui.print_menu("Customers Relathionship Manager", list_options, "Back to Main menu")
+        if option == 1:
+            show_table("customers.csv")
+        elif option == 2:
+            add("customers.csv")
+        elif option == 3:
+            remove("customers.csv", id_)
+        elif option == 4:
+            update("customers.csv", id_)
+        elif option == 5:
+            get_longest_name_id("customers.csv")
+        elif option == 6:
+            get_subscribed_emails("customers.csv")
+        elif option == 0:
+            return
+        pass
 
 
 # print the default table of records from the file
