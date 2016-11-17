@@ -22,38 +22,56 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 
 def start_module():
-    table = data_manager.get_table_from_file(current_file_path + "/persons_test.csv")
-    list_options = ["Show Table"
-                    "Add"
-                    "Remove"
-                    "Update"
-                    "Oldest person"
+    list_options = ["Show Table",
+                    "Add",
+                    "Remove",
+                    "Update",
+                    "Oldest person",
                     "Average age"]
+
+    exit_message = "Go back to main"
+
     while True:
         ui.print_menu("HR menu", list_options, "Exit to Main menu")
         inputs = ui.get_inputs(["Please enter a number: "], "")
-        option = inputs[0]
+        try:
+            option = int(inputs[0])
+        except ValueError:
+            continue
+        path = os.path.dirname(os.path.abspath(__file__)) + "/persons.csv"
+        table = data_manager.get_table_from_file(path)
 
         if option == 1:
-            show_table(table)
+
+            show_table(path)
+
         elif option == 2:
-            add(table)
+
+            data_manager.write_table_to_file(path, add(table))
+
         elif option == 3:
-            inputs = ui.get_inputs(["Enter an ID: "], "")
-            id_ = inputs[0]
-            remove(table, id_)
+
+            id_ = ui.get_inputs(["Enter an ID to remove: "], "")
+            data_manager.write_table_to_file(table, remove(path, id_[0]))
+
         elif option == 4:
-            inputs = ui.get_inputs(["Enter an ID: "], "")[0]
-            id_ = inputs[0]
-            update(table, id_)
+
+            id_ = ui.get_inputs(["Enter the ID to update or modify: "], "")
+            data_manager.write_table_to_file(path, update(table, id_[0]))
+
         elif option == 5:
-            get_oldest_person(table)
+
+            get_oldest_person(path)
+
         elif option == 6:
-            get_persons_closest_to_average(table)
+
+            get_persons_closest_to_average(path)
+
         elif option == 0:
             return
         else:
             raise KeyError("This is not an option.")
+
 
 # print the default table of records from the file
 #
@@ -78,10 +96,9 @@ def show_table(table):
 
 def add(table):
     title_list = ["ID", "Name", "Birth Date"]
-    table_to_extend = data_manager.get_table_from_file(table)
-
-    data_manager.write_table_to_file('persons.csv', table_to_extend)
-    return
+    new_element = ui.get_inputs(title_list, " ")
+    table.append(new_element)
+    return table
 
 
 # Remove the record having the id @id_ from the @list, than return @table
@@ -92,10 +109,11 @@ def add(table):
 
 def remove(table, id):
     remove_data = data_manager.get_table_from_file(table)
-    # to_remove =
-    data_manager.write_table_to_file(current_file_path + "/persons.csv", table)
-    return
-
+    for a in range(len(table)):
+        if str(id_) == str(table[a][0]):
+            table.pop(a)
+            break
+    return table
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
@@ -103,12 +121,14 @@ def remove(table, id):
 # @table: list of lists
 # @id_: string
 
+
 def update(table, id):
     title_list = ["ID", "Name", "Birth Date"]
-    update_table = data_manager.get_table_from_file(table)
-    # to_update = common?
-    data_manager.write_table_to_file(current_file_path + "/persons.csv", table)
-    return
+    for a in range(le(table)):
+        if str(id_) == str(table[a][0]):
+            updated_element = ui.get_inputs(title_list, " ")
+            table[a] = [id_] + updated_element
+    return table
 
 # special functions:
 # ------------------

@@ -32,57 +32,44 @@ def start_module():
                     "Get average durability by manufacturers"]
     while True:
         ui.print_menu("Tool Manager", list_options, "Back to Main menu")
-        inputs = ui.get_inputs(["Please select an option: "], "")     
+        inputs = ui.get_inputs(["Please select an option: "], "")
         path = os.path.dirname(os.path.abspath(__file__)) + "/tools.csv"
         table = data_manager.get_table_from_file(path)
         try:
             option = int(inputs[0])
         except:
             continue
-    
+
         if option == 1:
-            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            ''')
+
             show_table(path)
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 2:
-            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            ''')
+
             data_manager.write_table_to_file(path, add(table))
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 3:
-            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            ''')
+
             id_ = ui.get_inputs(["Enter the ID to remove: "], "")
             data_manager.write_table_to_file(path, remove(table, id_[0]))
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 4:
-            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            ''')
+
             id_ = ui.get_inputs(["Enter the ID to update or modify: "], "")
             data_manager.write_table_to_file(path, update(table, id_[0]))
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 5:
-            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            ''')
+
             get_available_tools(path)
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 6:
-            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            ''')
+
             get_average_durability_by_manufacturers(path)
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 0:
             return
         else:
             raise KeyError("There is no such option.")
-
 
 
 # print the default table of records from the file
@@ -137,11 +124,13 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_tools(table):
-    print ("Sorry, we don't have enough time to do this :'( ")
+    pass
 
 # the question: What are the average durability time for each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [avg] }
 #
 # @table: list of lists
+
+
 def get_average_durability_by_manufacturers(table):
-    print ("Sorry, we don't have enough time to do this :'( ")
+    pass

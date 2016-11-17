@@ -33,42 +33,31 @@ def start_module():
         table = data_manager.get_table_from_file(path)
 
         if option == 1:
-            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            ''')
+
             show_table(path)
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 2:
-            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            ''')
+
             data_manager.write_table_to_file(path, add(table))
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 3:
-            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            ''')
+
             id_ = ui.get_inputs(["Enter the ID to remove: "], "")
             data_manager.write_table_to_file(path, remove(table, id_[0]))
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 4:
             id_ = ui.get_inputs(["Enter the ID to update or modify: "], "")
             data_manager.write_table_to_file(path, update(table, id_[0]))
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 5:
-            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            ''')
+
             ui.print_result(which_year_max(table), "Which year had most amount?")
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 6:
-            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-            ''')
+
             year = ui.get_inputs(["Given year"], "")
             ui.print_result(avg_amount(table, year), "Average from the given year is : ")
-            print ('''
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
+
         elif option == 0:
             return
         else:

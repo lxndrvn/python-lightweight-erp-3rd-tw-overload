@@ -18,42 +18,51 @@ data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_ma
 # common module
 common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
 
-
 # start this module by a module menu like the main menu
 # user need to go back to the main menu from here
 # we need to reach the default and the special functions of this module from the module menu
 #
-def start_module():
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    table = data_manager.get_table_from_file(current_file_path + "/games.csv")
 
-    list_options = ["Show Table"
-                    "Add"
-                    "Remove"
-                    "Update"
-                    "Counts by Manufacturers"
+
+def start_module():
+    title = "Game Store"
+    exit = "Back to Main menu"
+    list_options = ["Show Table",
+                    "Add",
+                    "Remove",
+                    "Update",
+                    "Counts by Manufacturers",
                     "Average by Manucfacturer"]
 
-    ui.print_menu("Store", list_of_options, "Exit")
-
     while True:
+        ui.print_menu(title, list_options, exit)
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        path = os.path.dirname(os.path.abspath(__file__)) + "/games.csv"
+        table = data_manager.get_table_from_file(path)
+        try:
+            option = int(inputs[0])
+        except:
+            continue
+
         if option == 1:
-            show_table(table)
+            show_table(path)
         elif option == 2:
-            add(table)
+            data_manager.write_table_to_file(path, add(table))
         elif option == 3:
-            remove(table, id_)
+            id_ = ui.get_inputs(["Enter the ID to remove: "], "")
+            data_manager.write_table_to_file(path, remove(table, id_[0]))
         elif option == 4:
-            update(table, id_)
+            id_ = ui.get_inputs(["Enter the ID to update or modify: "], "")
+            data_manager.write_table_to_file(path, update(table, id_[0]))
         elif option == 5:
-            get_counts_by_manufacturers(table)
+            get_counts_by_manufacturers(path)
         elif option == 6:
-            get_average_by_manufacturer(table, manufacturer)
+            get_average_by_manufacturer(path)
         elif option == 0:
             return
         else:
-            raise KeyError("This is not an option")
+            raise KeyError("There is no such option.")
+
 # else?
 
 # print the default table of records from the file
@@ -63,10 +72,7 @@ def start_module():
 
 def show_table(table):
     list_of_titles = ["ID", "Title", "Manufacturers", "Price", "in stock"]
-
     ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
-
-
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
 # @table: list of lists
@@ -74,10 +80,8 @@ def show_table(table):
 
 def add(table):
     list_of_titles = ["ID", "Title", "Manufacturers", "Price", "in stock"]
-    table_to_extend = data_manager.get_table_from_file(table)
-    table_to_extend.append(common.ask_for_data_to_add(table_to_extend, list_of_titles[1:]))
-    data_manager.write_table_to_file('games.csv', table_to_extend)
-
+    new_element = ui.get_inputs(title_list, " ")
+    table.append(new_element)
     return table
 
 # Remove the record having the id @id_ from the @list, than return @table
@@ -87,13 +91,10 @@ def add(table):
 
 
 def remove(table, id_):
-    table_to_shorten = data_manager.get_table_from_file(table)
-    try:
-        table_to_shorten.remove(common.ask_for_data_to_remove(table_to_shorten, id_))
-        data_manager.write_table_to_file('games.csv', table_to_shorten)
-    except:
-        ui.print_error_message("No game found with this ID!\n")
-    start_module()
+    for i in table:
+        if id_ in i:
+            table.remove(i)
+    return table
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
@@ -104,9 +105,9 @@ def remove(table, id_):
 
 def update(table, id_):
     list_of_titles = ["ID", "Title", "Manufacturers", "Price", "In stock"]
-    table_to_update = data_manager.get_table_from_file(table)
-    updated_table = common.ask_for_data_and_update(table_to_update, id_, list_of_titles[1:])
-    data_manager.write_table_to_file('games.csv', updated_table)
+    for line in table:
+        if id_ in line:
+            line = [id_] + ui.get_inputs(list_labels, table)
     return table
 
 # special functions:
@@ -119,6 +120,7 @@ def update(table, id_):
 def get_counts_by_manufacturers(table):
     data = {}
     for i in range(len(table)):
+        print(table)
         stat = table[i][2] in data
         if stat is not True:
             data[table[i][2]] = 1
