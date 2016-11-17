@@ -12,10 +12,6 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 
 
 def start_module():
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-
-    table = data_manager.get_table_from_file(current_file_path + "/sellings.csv")
 
     list_options = ["Show Table",
                     "Add to table",
@@ -25,9 +21,15 @@ def start_module():
                     "Sold in a period"]
     exit_message = "Go back to main"
 
-    ui.print_menu("Sellings menu", list_options, "Exit to main menu")
-
     while True:
+        ui.print_menu("Sellings menu", list_options, "Exit to main menu")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        table = data_manager.get_table_from_file(current_file_path + "/sellings.csv")
+        try:
+            option = inputs[0]
+        except ValueError:
+            continue
+
         if option == 1:
             show_table(table)
         elif option == 2:

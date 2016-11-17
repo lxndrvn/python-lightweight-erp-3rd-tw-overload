@@ -13,44 +13,44 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 
 
 def start_module():
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-
-    table = data_manager.get_table_from_file(current_file_path + "/items.csv")
-
     list_options = ['Show table',
                     'Add',
                     'Remove',
                     'Update',
                     'get the highest profit',
                     'get the average profit']
+    exit_message = "Go back to main"
 
-    ui.print_menu("Accounting", list_options, "Exit to main menu")
     while True:
-        if option == "1":
+        ui.print_menu("Accounting", list_options, "Exit to main menu")
+        inputs = ui.get_inputs(["Please select an option: "], "")
+        table = data_manager.get_table_from_file(current_file_path + "/items.csv")
+        option = int(inputs[0])
+
+        if option == 1:
             show_table(table)
-        elif option == "2":
+        elif option == 2:
             add(table)
-        elif option == "3":
+        elif option == 3:
             id = ui.get_inputs(["Which id do you want to remove?"], "")
-        elif option == "4":
+        elif option == 4:
             id = ui.get_inputs(["Which id do you want to update?"], "")
             table = update(table, id)
-        elif option == "5":
+        elif option == 5:
             ui.print_result(which_year_max(table), "Which year had most amount?")
-        elif option == "6":
+        elif option == 6:
             year = ui.get_inputs(["Given year"], "")
             ui.print_result(avg_amount(table, year), "Average from the given year is : ")
         elif option == 0:
-            return False
+            return
         else:
             raise KeyError("This is not an option.")
 
 
 def show_table(table):
     title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
-    ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
-    start_module()
+    ui.print_table(table, title_list)
+    pass
 
 
 def add(table):

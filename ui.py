@@ -1,7 +1,7 @@
 def print_table(table, title_list):
     print(('|') + (" | ".join(title_list)) + ('|'))
     for row in table:
-        print(('|') + ('-') * 20 + ('|'))
+        print(('|') + ('-') * 100 + ('|'))
         print(('|') + (" | ".join(row)) + ('|'))
     print(('|') + ('-') * 20 + ('|'))
 
