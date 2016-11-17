@@ -32,14 +32,13 @@ def start_module():
                     "Get average durability by manufacturers"]
     while True:
         ui.print_menu("Tool Manager", list_options, "Back to Main menu")
-        inputs = ui.get_inputs(["Please select an option: "], "")
-        title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
-        try:
-            option = int(inputs[0])
-        except ValueError:
-            continue
+        inputs = ui.get_inputs(["Please select an option: "], "")     
         path = os.path.dirname(os.path.abspath(__file__)) + "/tools.csv"
         table = data_manager.get_table_from_file(path)
+        try:
+            option = int(inputs[0])
+        except:
+            continue
     
         if option == 1:
             print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••

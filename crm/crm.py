@@ -30,22 +30,57 @@ def start_module():
                     "Get the ID of the customer with the longest name",
                     "Get subscriber's emails"]
     while True:
-        ui.print_menu("Customers Relathionship Manager", list_options, "Back to Main menu")
+        ui.print_menu("Customer Relationship Management", list_options, "Back to Main menu")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        path = os.path.dirname(os.path.abspath(__file__)) + "/customers.csv"
+        table = data_manager.get_table_from_file(path)
+        try:
+            option = int(inputs[0])
+        except:
+            continue
+        
         if option == 1:
-            show_table("customers.csv")
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
+            show_table(path)
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 2:
-            add("customers.csv")
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
+            data_manager.write_table_to_file(path, add(table))
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 3:
-            remove("customers.csv", id_)
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
+            id = ui.get_inputs(['Enter the ID: '], '')[0]
+            data_manager.write_table_to_file(path, remove(table, id))
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 4:
-            update("customers.csv", id_)
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
+            id = ui.get_inputs(['Enter the ID: '], '')[0]
+            data_manager.write_table_to_file(path, update(table, id))
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 5:
-            get_longest_name_id("customers.csv")
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
+            get_longest_name_id(table)
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 6:
-            get_subscribed_emails("customers.csv")
+            print ('''••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+            ''')
+            get_subscribed_emails(table)
+            print ('''
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••''')
         elif option == 0:
             return
-        pass
+        else:
+            raise KeyError("There is no such option.")
 
 
 # print the default table of records from the file
@@ -53,7 +88,7 @@ def start_module():
 # @table: list of lists
 def show_table(table):
     title_list = ["ID", "Name", "Email", "Subscribed"]
-    ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
+    ui.print_table(data_manager.get_table_from_file(table), title_list)
     pass
 
 
@@ -61,9 +96,9 @@ def show_table(table):
 #
 # @table: list of lists
 def add(table):
-    title_list = ["ID", "Name", "Email", "Subscribed"]
-    new_record = [common.generate_random(table)] + ui.get_inputs(title_list, table)
-    table.append(new_record)
+    title_list = ["ID: ", "Name: ", "Email: ", "Subscribed: "]
+    new_element = [common.generate_random(table)] + ui.get_inputs(title_list, table)
+    table.append(new_element)
     return table
 
 
@@ -101,7 +136,7 @@ def update(table, id_):
 # return type: string (id) - if there are more than one longest name, return the first of descending alphabetical order
 def get_longest_name_id(table):
     title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
-    longest_name = [' ']
+    longest_name = [" "]
     for line in table:
         if len(line[1]) == len(longest_name[0]):
             longest_name.append(line[1])
@@ -117,6 +152,6 @@ def get_longest_name_id(table):
 def get_subscribed_emails(table):
     subscribers = []
     for line in table:
-        if '1' in line[3]:
-            subscribers.append(line[2] + ';' + line[1])
+        if "1" in line[3]:
+            subscribers.append(line[2] + ";" + line[1])
     return(subscribers)
