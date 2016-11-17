@@ -17,7 +17,7 @@ tool_manager = SourceFileLoader("tool_manager", main_path + "/tool_manager/tool_
 accounting = SourceFileLoader("accounting", main_path + "/accounting/accounting.py").load_module()
 # Selling module
 selling = SourceFileLoader("selling", main_path + "/selling/selling.py").load_module()
-# Customer Relationship Management (CRM) module
+# Customer Relationship Management (CRM) modu4le
 crm = SourceFileLoader("crm", main_path + "/crm/crm.py").load_module()
 
 

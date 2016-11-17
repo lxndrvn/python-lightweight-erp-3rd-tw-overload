@@ -1,5 +1,6 @@
 
 # importing everything you need
+
 import os
 from importlib.machinery import SourceFileLoader
 current_file_path = os.path.dirname(os.path.abspath(__file__))
@@ -12,10 +13,10 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 
 
 def start_module():
-
+    data_manager.get_table_from_file('items.csv')
     title = "Accounting"
 
-    list_options = ['Show_table',
+    list_options = ['Show table',
                     'Add',
                     'Remove',
                     'Update',
@@ -29,18 +30,18 @@ def start_module():
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
 
-    if option == 1:
-        show_table()
-    elif option == 2:
-        add(items.csv)
-    elif option == 3:
-        remove(items.csv, _id)
-    elif option == 4:
-        update(items.csv, _id)
-    elif option == 5:
+    if option == "1":
+        show_table('items.csv')
+    elif option == "2":
+        add('items.csv')
+    elif option == "3":
+        remove('items.csv', _id)
+    elif option == "4":
+        update('items.csv', _id)
+    elif option == "5":
         which_year_max(table)
-    elif option == 6:
-        avg_amount(table, 2016)
+    elif option == "6":
+        avg_amount(table, year)
     else:
         raise KeyError("It's not an option.")
 

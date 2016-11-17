@@ -23,17 +23,17 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-    if options == 1:
+    if option == 1:
         show_table("customers.csv")
-    elif options == 2:
+    elif option == 2:
         add("customers.csv")
-    elif options == 3:
+    elif option == 3:
         remove("customers.csv", id_)
-    elif options == 4:
+    elif option == 4:
         update("customers.csv", id_)
-    elif options == 5:
+    elif option == 5:
         get_longest_name_id("customers.csv")
-    elif options == 6:
+    elif option == 6:
         get_subscribed_emails("customers.csv")
     elif option == 0:
         return
@@ -101,7 +101,7 @@ def get_longest_name_id(table):
             longest_name[0] = line[1]
     for line in table:
         if min(longest_name) in line[1]:
-            return(line[0]) 
+            return(line[0])
 
 
 # the question: Which customers has subscribed to the newsletter?
