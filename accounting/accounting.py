@@ -24,19 +24,24 @@ def start_module():
     while True:
         ui.print_menu("Accounting", list_options, "Exit to main menu")
         inputs = ui.get_inputs(["Please select an option: "], "")
-        table = data_manager.get_table_from_file(current_file_path + "/items.csv")
-        option = int(inputs[0])
+        try:
+            option = int(inputs[0])
+        except ValueError:
+            continue
+
+        path = os.path.dirname(os.path.abspath(__file__)) + "/items.csv"
+        table = data_manager.get_table_from_file(path)
 
         if option == 1:
-            show_table(table)
+            show_table(path)
         elif option == 2:
-            data_manager.write_table_to_file(table, add(table))
+            data_manager.write_table_to_file(path, add(table))
         elif option == 3:
             id_ = ui.get_inputs(["Enter the ID to remove: "], "")
-            data_manager.write_table_to_file(table, remove(table, id_[0]))
+            data_manager.write_table_to_file(path, remove(table, id_[0]))
         elif option == 4:
             id_ = ui.get_inputs(["Enter the ID to update or modify: "], "")
-            data_manager.write_table_to_file(table, update(table, id_[0]))
+            data_manager.write_table_to_file(path, update(table, id_[0]))
         elif option == 5:
             ui.print_result(which_year_max(table), "Which year had most amount?")
         elif option == 6:
@@ -50,7 +55,7 @@ def start_module():
 
 def show_table(table):
     title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
-    ui.print_table(table, title_list)
+    ui.print_table(data_manager.get_table_from_file(table), title_list)
 
 
 def add(table):
