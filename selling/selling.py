@@ -40,7 +40,7 @@ def start_module():
             inputs[1]), int(inputs[2]), int(inputs[3]), int(inputs[4]), int(inputs[5])), "")
     elif option == "0":
         data_manager.write_table_to_file("selling/selling.csv", sell_list)
-        break
+        return
     else:
         raise KeyError("There is no such option.")
 
