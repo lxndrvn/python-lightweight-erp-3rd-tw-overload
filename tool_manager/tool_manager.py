@@ -142,4 +142,15 @@ def get_available_tools(table):
 
 
 def get_average_durability_by_manufacturers(table):
-    pass
+    result = {}
+    for line in table:
+        _, _, manufacturer, _, durability = line
+        if manufacturer in result:
+            d_sum, count = result[manufacturer]
+            result[manufacturer] = [d_sum + int(durability), count + 1]
+        else:
+            result[manufacturer] = [int(durability), 1]
+    for manufacturer, numbers in result.items():
+        d_sum, count = result[manufacturer]
+        result[manufacturer] = d_sum / count
+    return result
