@@ -30,12 +30,13 @@ def start_module():
         if option == 1:
             show_table(table)
         elif option == 2:
-            add(table)
+            data_manager.write_table_to_file(table, add(table))
         elif option == 3:
-            id = ui.get_inputs(["Which id do you want to remove?"], "")
+            id_ = ui.get_inputs(["Enter the ID to remove: "], "")
+            data_manager.write_table_to_file(table, remove(table, id_[0]))
         elif option == 4:
-            id = ui.get_inputs(["Which id do you want to update?"], "")
-            table = update(table, id)
+            id_ = ui.get_inputs(["Enter the ID to update or modify: "], "")
+            data_manager.write_table_to_file(table, update(table, id_[0]))
         elif option == 5:
             ui.print_result(which_year_max(table), "Which year had most amount?")
         elif option == 6:
@@ -50,13 +51,12 @@ def start_module():
 def show_table(table):
     title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
     ui.print_table(table, title_list)
-    pass
 
 
 def add(table):
     title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
-    add_item = [common.generate_random(table)] + ui.get_inputs(list_labels, table)
-    table.append(add_item)
+    new_element = ui.get_inputs(title_list, " ")
+    table.append(new_element)
     return table
 
 

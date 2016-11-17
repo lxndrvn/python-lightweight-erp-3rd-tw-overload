@@ -26,20 +26,20 @@ def start_module():
         inputs = ui.get_inputs(["Please enter a number: "], "")
         table = data_manager.get_table_from_file(current_file_path + "/sellings.csv")
         try:
-            option = inputs[0]
+            option = int(inputs[0])
         except ValueError:
             continue
 
         if option == 1:
             show_table(table)
         elif option == 2:
-            add(table)
+            data_manager.write_table_to_file(table, add(table))
         elif option == 3:
-            id_ = ui.get_inputs(["Which ID do you want to remove?"], "")
-            remove(table, id_)
+            id_ = ui.get_inputs(["Enter the ID to remove: "], "")
+            data_manager.write_table_to_file(table, remove(table, id_[0]))
         elif option == 4:
-            id_ = ui.get_inputs(["Which ID do you want to remove?"], "")
-            update(table, id_)
+            id_ = ui.get_inputs(["Enter the ID to update or modify: "], "")
+            data_manager.write_table_to_file(table, update(table, id_[0]))
         elif option == 5:
             get_lowest_price_item_id(table)
         elif option == 6:
@@ -55,14 +55,14 @@ def start_module():
 
 def show_table(table):
     title_list = ["ID", "Title", "Price", "Month", "Day", "Year"]
-    ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
+    ui.print_table(table, title_list)
     start_module()
 
 
 def add(table):
     title_list = ["ID", "Title", "Price", "Month", "Day", "Year"]
-    add_item = [common.generate_random(table)] + ui.get_inputs(list_labels, table)
-    table.append(add_item)
+    new_element = ui.get_inputs(title_list, " ")
+    table.append(new_element)
     return table
 
 

@@ -1,9 +1,9 @@
 def print_table(table, title_list):
     print(('|') + (" | ".join(title_list)) + ('|'))
     for row in table:
-        print(('|') + ('-') * 100 + ('|'))
+        print(('|') + ('-') * 40 + ('|'))
         print(('|') + (" | ".join(row)) + ('|'))
-    print(('|') + ('-') * 20 + ('|'))
+    print(('|') + ('-') * 40 + ('|'))
 
 
 def print_result(result, label):
