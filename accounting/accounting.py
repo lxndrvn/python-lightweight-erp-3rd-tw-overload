@@ -13,8 +13,10 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 
 
 def start_module():
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+
     table = data_manager.get_table_from_file(current_file_path + "/items.csv")
-    title = "Accounting"
 
     list_options = ['Show table',
                     'Add',
@@ -23,32 +25,32 @@ def start_module():
                     'get the highest profit',
                     'get the average profit']
 
-    exit_message = "Go back to main"
-
-    ui.print_menu(title, list_options, exit_message)
-
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-
-    if option == "1":
-        show_table('items.csv')
-    elif option == "2":
-        add('items.csv')
-    elif option == "3":
-        remove('items.csv', _id)
-    elif option == "4":
-        update('items.csv', _id)
-    elif option == "5":
-        which_year_max(table)
-    elif option == "6":
-        avg_amount(table, year)
-    else:
-        raise KeyError("It's not an option.")
+    ui.print_menu("Accounting", list_options, "Exit to main menu")
+    while True:
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            id = ui.get_inputs(["Which id do you want to remove?"], "")
+        elif option == "4":
+            id = ui.get_inputs(["Which id do you want to update?"], "")
+            table = update(table, id)
+        elif option == "5":
+            ui.print_result(which_year_max(table), "Which year had most amount?")
+        elif option == "6":
+            year = ui.get_inputs(["Given year"], "")
+            ui.print_result(avg_amount(table, year), "Average from the given year is : ")
+        elif option == 0:
+            return False
+        else:
+            raise KeyError("This is not an option.")
 
 
 def show_table(table):
     title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
-    ui.print_table(table, title_list)
+    ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
+    start_module()
 
 
 def add(table):

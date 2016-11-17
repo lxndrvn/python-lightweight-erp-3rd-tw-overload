@@ -12,37 +12,43 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 
 
 def start_module():
-    table = data_manager.get_table_from_file(current_file_path + "/sellings.csv")
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
+
+    table = data_manager.get_table_from_file(current_file_path + "/sellings.csv")
+
     list_options = ["Show Table",
                     "Add to table",
                     "Remove from table",
                     "Update table",
                     "Lowest price ID",
                     "Sold in a period"]
+    exit_message = "Go back to main"
+
     ui.print_menu("Sellings menu", list_options, "Exit to main menu")
 
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    if option == 1:
-        show_table('selling.csv')
-    elif option == 2:
-        add(selling.csv)
-    elif option == 3:
-        remove('sellings.csv', id_)
-    elif option == 4:
-        update('selings.csv', id_)
-    elif option == 5:
-        get_lowest_price_item_id(table)
-    elif option == 6:
-        list_labels = ["month from: ", "day from: ", "year from: ", "month to: ", "day to: ", "year to: "]
-        ui.print_result(get_items_sold_between(sell_list, int(inputs[0]), int(
-            inputs[1]), int(inputs[2]), int(inputs[3]), int(inputs[4]), int(inputs[5])), "")
-    elif option == "0":
-        data_manager.write_table_to_file("selling/selling.csv", sell_list)
-        return
-    else:
-        raise KeyError("There is no such option.")
+    while True:
+        if option == 1:
+            show_table(table)
+        elif option == 2:
+            add(table)
+        elif option == 3:
+            id_ = ui.get_inputs(["Which ID do you want to remove?"], "")
+            remove(table, id_)
+        elif option == 4:
+            id_ = ui.get_inputs(["Which ID do you want to remove?"], "")
+            update(table, id_)
+        elif option == 5:
+            get_lowest_price_item_id(table)
+        elif option == 6:
+            list_labels = ["month from: ", "day from: ", "year from: ", "month to: ", "day to: ", "year to: "]
+            ui.print_result(get_items_sold_between(sell_list, int(inputs[0]), int(
+                inputs[1]), int(inputs[2]), int(inputs[3]), int(inputs[4]), int(inputs[5])), "")
+        elif option == "0":
+            data_manager.write_table_to_file(table, sell_list)
+            return False
+        else:
+            raise KeyError("This is not an option.")
 
 
 def show_table(table):
