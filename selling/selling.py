@@ -12,8 +12,18 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 
 
 def start_module():
+    table = data_manager.get_table_from_file(current_file_path + "/sellings.csv")
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
+    list_options = ["Show Table",
+                    "Add to table",
+                    "Remove from table",
+                    "Update table",
+                    "Lowest price ID",
+                    "Sold in a period"]
+    ui.print_menu("Sellings menu", list_options, "Exit to main menu")
+
+    inputs = ui.get_inputs(["Please enter a number: "], "")
     if option == 1:
         show_table('selling.csv')
     elif option == 2:
@@ -25,7 +35,14 @@ def start_module():
     elif option == 5:
         get_lowest_price_item_id(table)
     elif option == 6:
-        get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
+        list_labels = ["month from: ", "day from: ", "year from: ", "month to: ", "day to: ", "year to: "]
+        ui.print_result(get_items_sold_between(sell_list, int(inputs[0]), int(
+            inputs[1]), int(inputs[2]), int(inputs[3]), int(inputs[4]), int(inputs[5])), "")
+    elif option == "0":
+        data_manager.write_table_to_file("selling/selling.csv", sell_list)
+        break
+    else:
+        raise KeyError("There is no such option.")
 
 
 def show_table(table):

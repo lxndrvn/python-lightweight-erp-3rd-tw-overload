@@ -13,7 +13,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 
 
 def start_module():
-    data_manager.get_table_from_file('items.csv')
+    table = data_manager.get_table_from_file(current_file_path + "/items.csv")
     title = "Accounting"
 
     list_options = ['Show table',
