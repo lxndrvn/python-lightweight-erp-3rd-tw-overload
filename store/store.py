@@ -120,7 +120,6 @@ def update(table, id_):
 def get_counts_by_manufacturers(table):
     data = {}
     for i in range(len(table)):
-        print(table)
         stat = table[i][2] in data
         if stat is not True:
             data[table[i][2]] = 1

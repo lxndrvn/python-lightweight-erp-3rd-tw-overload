@@ -124,7 +124,16 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_tools(table):
-    pass
+    current_year = 2016
+    result = []
+    for line in table:
+        year = line[3]
+        durability = line[4]
+        if int(year) + int(durability) > current_year:
+            line[3] = int(year)
+            line[4] = int(durability)
+            result.append(line)
+    return result
 
 # the question: What are the average durability time for each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [avg] }
