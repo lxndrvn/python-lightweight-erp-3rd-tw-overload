@@ -14,14 +14,14 @@ def generate_random(table):
     l = "abcdefghijklmnopqrstuvwxyz"
     c = "[!@#$%^&*()?]"
     id = [i[0] for i in table]
-while True:
-    num = [random.randint(0, 9) for i in range(2)]
-    lo = [l[random.randint(0, len(l) - 1)] for i in range(2)]
-    up = [l[random.randint(0, len(l) - 1)].u() for i in range(2)]
-    spec = [c[random.randint(0, len(c) - 1)] for i in range(2)]
-    app = num + letter + up + spec
-    generated = "".join(str(i) for i in app)
-    if pw not in id:
-        return False
-    else:
-        return generated
+    while True:
+        num = [random.randint(0, 9) for i in range(2)]
+        lo = [l[random.randint(0, len(l) - 1)] for i in range(2)]
+        up = [l[random.randint(0, len(l) - 1)].u() for i in range(2)]
+        spec = [c[random.randint(0, len(c) - 1)] for i in range(2)]
+        app = num + letter + up + spec
+        generated = "".join(str(i) for i in app)
+        if pw not in id:
+            return False
+        else:
+            return generated
