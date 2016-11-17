@@ -22,32 +22,49 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # start this module by a module menu like the main menu
 # user need to go back to the main menu from here
 # we need to reach the default and the special functions of this module from the module menu
-#
+
 def start_module():
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == 1:
-        show_table("tools.csv")
-    elif option == 2:
-        add("tools.csv")
-    elif option == 3:
-        remove("tools.csv", id_)
-    elif option == 4:
-        update("tools.csv", id_)
-    elif option == 5:
-        get_available_tools("tools.csv")
-    elif option == 6:
-        get_average_durability_by_manufacturers("tools.csv")
-    elif option == 0:
-        return
-    pass
+    list_options = ["Show tool table",
+                    "Add tool",
+                    "Remove tool",
+                    "Update tool",
+                    "Get available tools",
+                    "Get average durability by manufacturers"]
+    while True:
+        ui.print_menu("Tool Manager", list_options, "Back to Main menu")
+        inputs = ui.get_inputs(["Please select an option: "], "")
+        title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
+        try:
+            option = int(inputs[0])
+        except ValueError:
+            continue
+        path = os.path.dirname(os.path.abspath(__file__)) + "/tools.csv"
+        table = data_manager.get_table_from_file(path)
+    
+        if option == 1:
+            show_table(path)
+        elif option == 2:
+            add(path)
+        elif option == 3:
+            remove(path, id_)
+        elif option == 4:
+            update(path, id_)
+        elif option == 5:
+            get_available_tools(path)
+        elif option == 6:
+            get_average_durability_by_manufacturers(path)
+        elif option == 0:
+            return
+        else:
+            raise KeyError("There is no such option.")
+
 
 
 # print the default table of records from the file
 # @table: list of lists
 def show_table(table):
     title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
-    ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
+    ui.print_table(data_manager.get_table_from_file(table), title_list)
     pass
 
 
@@ -55,8 +72,8 @@ def show_table(table):
 #
 # @table: list of lists
 def add(table):
-    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
-    ID = (common.generate_random(table))
+    title_list = ["ID: ", "Name: ", "Manufacturer: ", "Purchase date: ", "Durability: "]
+    ID = ()
     new_element = [ID] + ui.get_inputs(title_list, " ")
     table.append(new_element)
     return table
@@ -67,7 +84,7 @@ def add(table):
 # @table: list of lists
 # @id_: string
 def remove(table, id_):
-    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
+    title_list = ["ID: ", "Name: ", "Manufacturer: ", "Purchase date: ", "Durability: "]
     for a in range(len(table)):
         if str(id_) == str(table[a][0]):
             table.pop(a)
@@ -81,7 +98,7 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
-    title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
+    title_list = ["ID: ", "Name: ", "Manufacturer: ", "Purchase date: ", "Durability: "]
     for a in range(len(table)):
         if str(id_) == str(table[a][0]):
             updated_element = ui.get_inputs(title_list, " ")
@@ -101,10 +118,10 @@ def get_available_tools(table):
     title_list = ["ID", "Name", "Manufacturer", "Purchase date", "Durability"]
     available_tools = [element for element in table if (int(element[3]) + int(element[4])) >= date]
     for a in range(len(available_tools)):
-        available_tools[a][3] = int(available_tools[a][3])
-        available_tools[a][4] = int(available_tools[a][4])
+        available_tools[a][0] = int(available_tools[a][0])
+        available_tools[a][1] = int(available_tools[a][1])
     return available_tools
-
+    pass
 
 # the question: What are the average durability time for each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [avg] }
