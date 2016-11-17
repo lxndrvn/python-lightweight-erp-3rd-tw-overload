@@ -26,19 +26,34 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 def start_module():
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
-    if option == 1:
-        show_table("games.csv")
-    elif option == 2:
-        add("games.csv")
-    elif option == 3:
-        remove("games.csv", id)
-    elif option == 4:
-        update("games.csv", id)
-    elif option == 5:
-        get_counts_by_manufacturers(table)
-    elif option == 6:
-        get_average_by_manufacturer(table, manufacturer)
+    table = data_manager.get_table_from_file(current_file_path + "/games.csv")
 
+    list_options = ["Show Table"
+                    "Add"
+                    "Remove"
+                    "Update"
+                    "Counts by Manufacturers"
+                    "Average by Manucfacturer"]
+
+    ui.print_menu("Store", list_of_options, "Exit")
+
+    while True:
+        if option == 1:
+            show_table(table)
+        elif option == 2:
+            add(table)
+        elif option == 3:
+            remove(table, id_)
+        elif option == 4:
+            update(table, id_)
+        elif option == 5:
+            get_counts_by_manufacturers(table)
+        elif option == 6:
+            get_average_by_manufacturer(table, manufacturer)
+        elif option == 0:
+            return
+        else:
+            raise KeyError("This is not an option")
 # else?
 
 # print the default table of records from the file
@@ -48,8 +63,9 @@ def start_module():
 
 def show_table(table):
     list_of_titles = ["ID", "Title", "Manufacturers", "Price", "in stock"]
+
     ui.print_table(data_manager.get_table_from_file(table), list_of_titles)
-    start_module()
+
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
@@ -61,7 +77,8 @@ def add(table):
     table_to_extend = data_manager.get_table_from_file(table)
     table_to_extend.append(common.ask_for_data_to_add(table_to_extend, list_of_titles[1:]))
     data_manager.write_table_to_file('games.csv', table_to_extend)
-    start_module()
+
+    return table
 
 # Remove the record having the id @id_ from the @list, than return @table
 #
@@ -86,11 +103,11 @@ def remove(table, id_):
 
 
 def update(table, id_):
-    list_of_titles = ["ID", "Title", "Manufacturers", "Price", "in stock"]
+    list_of_titles = ["ID", "Title", "Manufacturers", "Price", "In stock"]
     table_to_update = data_manager.get_table_from_file(table)
     updated_table = common.ask_for_data_and_update(table_to_update, id_, list_of_titles[1:])
     data_manager.write_table_to_file('games.csv', updated_table)
-    start_module()
+    return table
 
 # special functions:
 # ------------------

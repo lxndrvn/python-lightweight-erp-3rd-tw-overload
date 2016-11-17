@@ -21,30 +21,39 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # user need to go back to the main menu from here
 # we need to reach the default and the special functions of this module from the module menu
 
-def start():
+def start_module():
     table = data_manager.get_table_from_file(current_file_path + "/persons_test.csv")
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    id = 0
-    if option == 1:
-        show_table("persons.csv")
-    elif option == 2:
-        add("persons.csv")
-    elif option == 3:
-        id_ = ui.get_inputs(["Enter an ID: "], "")
-        remove("persons.csv", id_)
-    elif option == 4:
-        id_ = ui.get_inputs(["Enter an ID: "], "")[0]
-        update("person.csv", id_)
-    elif option == 5:
-        get_oldest_person(table)
-    elif option == 6:
-        get_persons_closest_to_average(table)
-    elif option == 0:
-        return
-    else:
-        raise KeyError("This is not an option.")
+    list_options = ["Show Table"
+                    "Add"
+                    "Remove"
+                    "Update"
+                    "Oldest person"
+                    "Average age"]
+    while True:
+        ui.print_menu("HR menu", list_options, "Exit to Main menu")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
 
+        if option == 1:
+            show_table(table)
+        elif option == 2:
+            add(table)
+        elif option == 3:
+            inputs = ui.get_inputs(["Enter an ID: "], "")
+            id_ = inputs[0]
+            remove(table, id_)
+        elif option == 4:
+            inputs = ui.get_inputs(["Enter an ID: "], "")[0]
+            id_ = inputs[0]
+            update(table, id_)
+        elif option == 5:
+            get_oldest_person(table)
+        elif option == 6:
+            get_persons_closest_to_average(table)
+        elif option == 0:
+            return
+        else:
+            raise KeyError("This is not an option.")
 
 # print the default table of records from the file
 #
